@@ -15,5 +15,6 @@ module Types
     end
 
     field :posts, resolver: Resolvers::Posts::IndexResolver
+    field :post, resolver: Resolvers::Posts::ShowResolver
   end
 end
