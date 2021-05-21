@@ -14,12 +14,6 @@ module Types
       "Hello World!"
     end
 
-    field :posts, [Types::PostType], null: false do
-      argument :page, Int, required: true
-      argument :per, Int, required: true
-    end
-    def posts(**args)
-      Post.page(args[:page]).per(args[:per])
-    end
+    field :posts, resolver: Resolvers::Posts::IndexResolver
   end
 end
