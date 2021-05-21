@@ -2,6 +2,15 @@ class VibloGraphqlRubySchema < GraphQL::Schema
   mutation(Types::MutationType)
   query(Types::QueryType)
 
+  rescue_from(ActiveRecord::RecordNotFound) do |err, obj, args, ctx, field|
+    raise GraphQL::ExecutionError.new err.message, extensions: {
+      err: err,
+      obj: obj,
+      args: args,
+      ctx: ctx
+    }
+  end
+
   # Union and Interface Resolution
   def self.resolve_type(abstract_type, obj, ctx)
     # TODO: Implement this function
